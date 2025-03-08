@@ -21,126 +21,122 @@ import {
   ShoppingBagIcon,
   XMarkIcon,
 } from "@heroicons/react/24/outline";
+import Image from "next/image";
 
 const navigation = {
   categories: [
     {
-      id: "women",
-      name: "Women",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-01.jpg",
-          imageAlt:
-            "Models sitting back to back, wearing Basic Tee in black and bone.",
-        },
-        {
-          name: "Basic Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/mega-menu-category-02.jpg",
-          imageAlt:
-            "Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.",
-        },
-      ],
+      id: "product",
+      name: "Product",
       sections: [
         {
-          id: "clothing",
-          name: "Clothing",
+          id: "bulb",
+          name: "Bulb",
           items: [
-            { name: "Tops", href: "#" },
-            { name: "Dresses", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Denim", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
+            { name: "9 Watt LED Bulb", _id: "676" },
+            { name: "12 Watt LED Bulb", _id: "677" },
+            { name: "15 Watt LED Bulb", _id: "678" },
+            { name: "Smart LED Bulb", _id: "679" },
+            { name: "Emergency LED Bulb", _id: "680" },
           ],
         },
         {
-          id: "accessories",
-          name: "Accessories",
+          id: "fan",
+          name: "Fan",
           items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
+            { name: "Ceiling Fan", _id: "681" },
+            { name: "Table Fan", _id: "682" },
+            { name: "Wall Fan", _id: "683" },
+            { name: "Exhaust Fan", _id: "684" },
+            { name: "Pedestal Fan", _id: "685" },
           ],
         },
         {
-          id: "brands",
-          name: "Brands",
+          id: "wire",
+          name: "Wire",
           items: [
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Significant Other", href: "#" },
+            { name: "Copper Wire (1.5mm)", _id: "686" },
+            { name: "Copper Wire (2.5mm)", _id: "687" },
+            { name: "Aluminum Wire (1.5mm)", _id: "688" },
+            { name: "Aluminum Wire (2.5mm)", _id: "689" },
+            { name: "Flexible Wire", _id: "690" },
+          ],
+        },
+        {
+          id: "fuse",
+          name: "Fuse",
+          items: [
+            { name: "5 Amp Fuse", _id: "691" },
+            { name: "10 Amp Fuse", _id: "692" },
+            { name: "15 Amp Fuse", _id: "693" },
+            { name: "20 Amp Fuse", _id: "694" },
+            { name: "25 Amp Fuse", _id: "695" },
+          ],
+        },
+        {
+          id: "wiring_pipe",
+          name: "Wiring Pipe",
+          items: [
+            { name: "PVC Pipe (1/2 inch)", _id: "696" },
+            { name: "PVC Pipe (3/4 inch)", _id: "697" },
+            { name: "Conduit Pipe (1/2 inch)", _id: "698" },
+            { name: "Conduit Pipe (3/4 inch)", _id: "699" },
+            { name: "Flexible Pipe", _id: "700" },
+          ],
+        },
+        {
+          id: "switch",
+          name: "Switch",
+          items: [
+            { name: "Single Pole Switch", _id: "701" },
+            { name: "Double Pole Switch", _id: "702" },
+            { name: "Three-Way Switch", _id: "703" },
+            { name: "Four-Way Switch", _id: "704" },
+            { name: "Dimmer Switch", _id: "705" },
+          ],
+        },
+        {
+          id: "socket",
+          name: "Socket",
+          items: [
+            { name: "2-Pin Socket", _id: "706" },
+            { name: "3-Pin Socket", _id: "707" },
+            { name: "Universal Socket", _id: "708" },
+            { name: "Industrial Socket", _id: "709" },
+            { name: "USB Socket", _id: "710" },
           ],
         },
       ],
     },
     {
-      id: "men",
-      name: "Men",
-      featured: [
-        {
-          name: "New Arrivals",
-          href: "#",
-          imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-04-detail-product-shot-01.jpg",
-          imageAlt:
-            "Drawstring top with elastic loop closure and textured interior padding.",
-        },
-        {
-          name: "Artwork Tees",
-          href: "#",
-          imageSrc:
-            "https://tailwindcss.com/plus-assets/img/ecommerce-images/category-page-02-image-card-06.jpg",
-          imageAlt:
-            "Three shirts in gray, white, and blue arranged on table with same line drawing of hands and shapes overlapping on front of shirt.",
-        },
-      ],
+      id: "brands",
+      name: "Brands",
       sections: [
-        {
-          id: "clothing",
-          name: "Clothing",
-          items: [
-            { name: "Tops", href: "#" },
-            { name: "Pants", href: "#" },
-            { name: "Sweaters", href: "#" },
-            { name: "T-Shirts", href: "#" },
-            { name: "Jackets", href: "#" },
-            { name: "Activewear", href: "#" },
-            { name: "Browse All", href: "#" },
-          ],
-        },
-        {
-          id: "accessories",
-          name: "Accessories",
-          items: [
-            { name: "Watches", href: "#" },
-            { name: "Wallets", href: "#" },
-            { name: "Bags", href: "#" },
-            { name: "Sunglasses", href: "#" },
-            { name: "Hats", href: "#" },
-            { name: "Belts", href: "#" },
-          ],
-        },
         {
           id: "brands",
           name: "Brands",
           items: [
-            { name: "Re-Arranged", href: "#" },
-            { name: "Counterfeit", href: "#" },
-            { name: "Full Nelson", href: "#" },
-            { name: "My Way", href: "#" },
+            { name: "Philips", _id: "801" },
+            { name: "Syska", _id: "802" },
+            { name: "Havells", _id: "803" },
+            { name: "Wipro", _id: "804" },
+            { name: "Bajaj", _id: "805" },
+            { name: "Orient", _id: "806" },
+            { name: "Usha", _id: "807" },
+            { name: "Crompton", _id: "808" },
+            { name: "Finolex", _id: "809" },
+            { name: "RR Kabel", _id: "810" },
+            { name: "Polycab", _id: "811" },
+            { name: "KEI", _id: "812" },
+            { name: "L&T", _id: "813" },
+            { name: "Siemens", _id: "814" },
+            { name: "ABB", _id: "815" },
+            { name: "Schneider", _id: "816" },
+            { name: "Astral", _id: "817" },
+            { name: "Supreme", _id: "818" },
+            { name: "Prince", _id: "819" },
+            { name: "Legrand", _id: "820" },
+            { name: "Anchor", _id: "821" },
           ],
         },
       ],
@@ -152,7 +148,7 @@ const navigation = {
   ],
 };
 
-export default function Example() {
+export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   return (
@@ -201,30 +197,6 @@ export default function Example() {
                     key={category.name}
                     className="space-y-10 px-4 pt-10 pb-8"
                   >
-                    <div className="grid grid-cols-2 gap-x-4">
-                      {category.featured.map((item) => (
-                        <div key={item.name} className="group relative text-sm">
-                          <img
-                            alt={item.imageAlt}
-                            src={item.imageSrc}
-                            className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                          />
-                          <a
-                            href={item.href}
-                            className="mt-6 block font-medium text-gray-900"
-                          >
-                            <span
-                              aria-hidden="true"
-                              className="absolute inset-0 z-10"
-                            />
-                            {item.name}
-                          </a>
-                          <p aria-hidden="true" className="mt-1">
-                            Shop now
-                          </p>
-                        </div>
-                      ))}
-                    </div>
                     {category.sections.map((section) => (
                       <div key={section.name}>
                         <p
@@ -240,12 +212,7 @@ export default function Example() {
                         >
                           {section.items.map((item) => (
                             <li key={item.name} className="flow-root">
-                              <a
-                                href={item.href}
-                                className="-m-2 block p-2 text-gray-500"
-                              >
-                                {item.name}
-                              </a>
+                              {item.name}
                             </li>
                           ))}
                         </ul>
@@ -287,20 +254,6 @@ export default function Example() {
                 </a>
               </div>
             </div>
-
-            <div className="border-t border-gray-200 px-4 py-6">
-              <a href="#" className="-m-2 flex items-center p-2">
-                <img
-                  alt=""
-                  src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
-                  className="block h-auto w-5 shrink-0"
-                />
-                <span className="ml-3 block text-base font-medium text-gray-900">
-                  CAD
-                </span>
-                <span className="sr-only">, change currency</span>
-              </a>
-            </div>
           </DialogPanel>
         </div>
       </Dialog>
@@ -330,10 +283,13 @@ export default function Example() {
               <div className="ml-4 flex lg:ml-0">
                 <a href="#">
                   <span className="sr-only">Your Company</span>
-                  <img
-                    alt=""
-                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                  <Image
                     className="h-8 w-auto"
+                    src="https://tailwindcss.com/plus-assets/img/logos/mark.svg?color=indigo&shade=600"
+                    alt="Your Company"
+                    width={180}
+                    height={38}
+                    priority
                   />
                 </a>
               </div>
@@ -362,33 +318,6 @@ export default function Example() {
                         <div className="relative bg-white">
                           <div className="mx-auto max-w-7xl px-8">
                             <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                              <div className="col-start-2 grid grid-cols-2 gap-x-8">
-                                {category.featured.map((item) => (
-                                  <div
-                                    key={item.name}
-                                    className="group relative text-base sm:text-sm"
-                                  >
-                                    <img
-                                      alt={item.imageAlt}
-                                      src={item.imageSrc}
-                                      className="aspect-square w-full rounded-lg bg-gray-100 object-cover group-hover:opacity-75"
-                                    />
-                                    <a
-                                      href={item.href}
-                                      className="mt-6 block font-medium text-gray-900"
-                                    >
-                                      <span
-                                        aria-hidden="true"
-                                        className="absolute inset-0 z-10"
-                                      />
-                                      {item.name}
-                                    </a>
-                                    <p aria-hidden="true" className="mt-1">
-                                      Shop now
-                                    </p>
-                                  </div>
-                                ))}
-                              </div>
                               <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
                                 {category.sections.map((section) => (
                                   <div key={section.name}>
@@ -405,12 +334,7 @@ export default function Example() {
                                     >
                                       {section.items.map((item) => (
                                         <li key={item.name} className="flex">
-                                          <a
-                                            href={item.href}
-                                            className="hover:text-gray-800"
-                                          >
-                                            {item.name}
-                                          </a>
+                                          {item.name}
                                         </li>
                                       ))}
                                     </ul>
@@ -450,21 +374,6 @@ export default function Example() {
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Create account
-                  </a>
-                </div>
-
-                <div className="hidden lg:ml-8 lg:flex">
-                  <a
-                    href="#"
-                    className="flex items-center text-gray-700 hover:text-gray-800"
-                  >
-                    <img
-                      alt=""
-                      src="https://tailwindcss.com/plus-assets/img/flags/flag-canada.svg"
-                      className="block h-auto w-5 shrink-0"
-                    />
-                    <span className="ml-3 block text-sm font-medium">CAD</span>
-                    <span className="sr-only">, change currency</span>
                   </a>
                 </div>
 

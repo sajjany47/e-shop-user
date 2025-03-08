@@ -1,3 +1,4 @@
+import { Button } from "@headlessui/react";
 import React from "react";
 
 const ProductView = () => {
@@ -134,12 +135,13 @@ const ProductView = () => {
               Free Delivery
             </p>
             <div className="flex space-x-4">
-              <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+              <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
                 Buy Now
-              </button>
-              <button className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
+              </Button>
+
+              <Button className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300">
                 Add to Cart
-              </button>
+              </Button>
             </div>
           </div>
         </div>
