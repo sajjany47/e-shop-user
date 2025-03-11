@@ -1,11 +1,9 @@
-import Checkout from "./component/Checkout";
-import Navbar from "./component/Navbar";
+import Product from "./component/ProductList";
 
 export default function Home() {
   return (
     <>
-      <Navbar />
-      <Checkout />
+      <Product />
     </>
   );
 }
