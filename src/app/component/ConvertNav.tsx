@@ -1,20 +1,14 @@
 "use client";
 
 import { useState } from "react";
-
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
   ShoppingBagIcon,
-  XMarkIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import {
-  Dialog,
-  DialogContent,
-  DialogOverlay,
-  DialogTrigger,
-} from "@/components/ui/dialog";
+import { Dialog, DialogTrigger } from "@/components/ui/dialog";
+import { SheetContent } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
 import {
@@ -22,6 +16,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { Sheet } from "@/components/ui/sheet";
 
 const navigation = {
   categories: [
@@ -154,24 +149,12 @@ export default function ConvertNav() {
   return (
     <div className="bg-white">
       {/* Mobile menu */}
-      <Dialog open={open} onOpenChange={setOpen}>
-        <DialogOverlay className="fixed inset-0 bg-black/25" />
-        <DialogContent className="fixed inset-0 z-40 flex w-full max-w-xs flex-col overflow-y-auto bg-white pb-12 shadow-xl">
-          <div className="flex px-4 pt-5 pb-2">
-            <button
-              type="button"
-              onClick={() => setOpen(false)}
-              className="relative -m-2 inline-flex items-center justify-center rounded-md p-2 text-gray-400"
-            >
-              <span className="absolute -inset-0.5" />
-              <span className="sr-only">Close menu</span>
-              <XMarkIcon aria-hidden="true" className="size-6" />
-            </button>
-          </div>
 
-          {/* Links */}
+      <Sheet open={open} onOpenChange={() => setOpen(false)}>
+        <SheetContent side="left" style={{ gap: "4px" }}>
           <Tabs defaultValue={navigation.categories[0].name} className="mt-2">
-            <TabsList className="border-b border-gray-200">
+            {/* Tabs List with Gap */}
+            <TabsList className="border-b border-gray-200 flex gap-x-2">
               {navigation.categories.map((category) => (
                 <TabsTrigger
                   key={category.name}
@@ -182,37 +165,42 @@ export default function ConvertNav() {
                 </TabsTrigger>
               ))}
             </TabsList>
-            {navigation.categories.map((category) => (
-              <TabsContent
-                key={category.name}
-                value={category.name}
-                className="space-y-10 px-4 pt-10 pb-8"
-              >
-                {category.sections.map((section) => (
-                  <div key={section.name}>
-                    <p
-                      id={`${category.id}-${section.id}-heading-mobile`}
-                      className="font-medium text-gray-900"
-                    >
-                      {section.name}
-                    </p>
-                    <ul
-                      role="list"
-                      aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                      className="mt-6 flex flex-col space-y-6"
-                    >
-                      {section.items.map((item) => (
-                        <li key={item.name} className="flow-root">
-                          {item.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </TabsContent>
-            ))}
+
+            {/* Tabs Content with Scrollable Data */}
+            <div className="max-h-[400px] overflow-y-auto">
+              {navigation.categories.map((category) => (
+                <TabsContent
+                  key={category.name}
+                  value={category.name}
+                  className="space-y-10 px-4 pt-10 pb-8"
+                >
+                  {category.sections.map((section) => (
+                    <div key={section.name}>
+                      <p
+                        id={`${category.id}-${section.id}-heading-mobile`}
+                        className="font-medium text-gray-900"
+                      >
+                        {section.name}
+                      </p>
+                      <ul
+                        role="list"
+                        aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
+                        className="mt-6 flex flex-col space-y-6"
+                      >
+                        {section.items.map((item) => (
+                          <li key={item.name} className="flow-root">
+                            {item.name}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </TabsContent>
+              ))}
+            </div>
           </Tabs>
 
+          {/* Pages Section */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
             {navigation.pages.map((page) => (
               <div key={page.name} className="flow-root">
@@ -226,6 +214,7 @@ export default function ConvertNav() {
             ))}
           </div>
 
+          {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
             <div className="flow-root">
               <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
@@ -238,8 +227,8 @@ export default function ConvertNav() {
               </a>
             </div>
           </div>
-        </DialogContent>
-      </Dialog>
+        </SheetContent>
+      </Sheet>
 
       <header className="relative bg-white">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
@@ -257,6 +246,7 @@ export default function ConvertNav() {
                   <button
                     type="button"
                     className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
+                    onClick={() => setOpen(true)}
                   >
                     <span className="absolute -inset-0.5" />
                     <span className="sr-only">Open menu</span>
