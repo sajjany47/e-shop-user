@@ -1,9 +1,11 @@
-import Product from "./component/ProductList";
+import ConvertNav from "./component/ConvertNav";
+import Navbar from "./component/Navbar";
 
 export default function Home() {
   return (
     <>
-      <Product />
+      {/* <Navbar /> */}
+      <ConvertNav />
     </>
   );
 }
