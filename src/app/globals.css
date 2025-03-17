@@ -123,4 +123,13 @@
   body {
     @apply bg-background text-foreground;
   }
+
 }
+
+.custom-tabs .bg-muted{
+  
+  background-color: white;
+ }
+ .custom-tabs .border-b{
+  border-bottom-width:0px
+ }

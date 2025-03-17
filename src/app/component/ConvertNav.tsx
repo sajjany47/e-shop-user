@@ -147,14 +147,17 @@ export default function ConvertNav() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="bg-white">
+    <div className="bg-white ">
       {/* Mobile menu */}
 
       <Sheet open={open} onOpenChange={() => setOpen(false)}>
-        <SheetContent side="left" style={{ gap: "4px" }}>
-          <Tabs defaultValue={navigation.categories[0].name} className="mt-2">
+        <SheetContent side="left">
+          <Tabs
+            defaultValue={navigation.categories[0].name}
+            className="custom-tabs mt-2"
+          >
             {/* Tabs List with Gap */}
-            <TabsList className="border-b border-gray-200 flex gap-x-2">
+            <TabsList className="border-b border-gray-200 flex gap-x-8">
               {navigation.categories.map((category) => (
                 <TabsTrigger
                   key={category.name}
