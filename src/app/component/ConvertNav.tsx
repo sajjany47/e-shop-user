@@ -7,7 +7,6 @@ import {
   ShoppingBagIcon,
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { Dialog, DialogTrigger } from "@/components/ui/dialog";
 import { SheetContent } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
@@ -244,19 +243,11 @@ export default function ConvertNav() {
         >
           <div className="border-b border-gray-200">
             <div className="flex h-16 items-center">
-              <Dialog>
-                <DialogTrigger asChild>
-                  <button
-                    type="button"
-                    className="relative rounded-md bg-white p-2 text-gray-400 lg:hidden"
-                    onClick={() => setOpen(true)}
-                  >
-                    <span className="absolute -inset-0.5" />
-                    <span className="sr-only">Open menu</span>
-                    <Bars3Icon aria-hidden="true" className="size-6" />
-                  </button>
-                </DialogTrigger>
-              </Dialog>
+              <Bars3Icon
+                aria-hidden="true"
+                className="size-6 lg:hidden"
+                onClick={() => setOpen(true)}
+              />
 
               {/* Logo */}
               <div className="ml-4 flex lg:ml-0">
