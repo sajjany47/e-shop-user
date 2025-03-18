@@ -132,20 +132,6 @@ const navigation = {
         },
       ],
     },
-    // {
-    //   id: "company",
-    //   name: "Company",
-    //   sections: [],
-    // },
-    // {
-    //   id: "stores",
-    //   name: "Stores",
-    //   sections: [],
-    // },
-  ],
-  pages: [
-    { name: "Company", href: "#" },
-    { name: "Stores", href: "#" },
   ],
 };
 
@@ -257,20 +243,6 @@ export default function ConvertNav() {
               ))}
             </div>
           </Tabs>
-
-          {/* Pages Section */}
-          <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-            {navigation.pages.map((page) => (
-              <div key={page.name} className="flow-root">
-                <a
-                  href={page.href}
-                  className="-m-2 block p-2 font-medium text-gray-900"
-                >
-                  {page.name}
-                </a>
-              </div>
-            ))}
-          </div>
 
           {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
