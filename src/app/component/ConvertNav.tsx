@@ -10,12 +10,9 @@ import Image from "next/image";
 import { SheetContent } from "@/components/ui/sheet";
 import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
 import { TabsTrigger } from "@radix-ui/react-tabs";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
 import { Sheet } from "@/components/ui/sheet";
+import { Minus, Plus } from "lucide-react";
+import { Checkbox } from "@/components/ui/checkbox";
 
 const navigation = {
   categories: [
@@ -135,12 +132,51 @@ const navigation = {
         },
       ],
     },
+    // {
+    //   id: "company",
+    //   name: "Company",
+    //   sections: [],
+    // },
+    // {
+    //   id: "stores",
+    //   name: "Stores",
+    //   sections: [],
+    // },
   ],
   pages: [
     { name: "Company", href: "#" },
     { name: "Stores", href: "#" },
   ],
 };
+
+const filters = [
+  {
+    id: "color",
+    name: "Color",
+    options: ["White", "Beige", "Blue", "Brown", "Green", "Purple"],
+  },
+  {
+    id: "category",
+    name: "Category",
+    options: ["New Arrivals", "Sale", "Travel", "Organization", "Accessories"],
+  },
+  {
+    id: "size",
+    name: "Size",
+    options: ["2L", "6L", "12L", "18L", "20L", "40L"],
+  },
+  {
+    id: "sort",
+    name: "Sort",
+    options: [
+      "Most Popular",
+      "Best Rating",
+      "Newest",
+      "Price: Low to High",
+      "Price: High to Low",
+    ],
+  },
+];
 
 export default function ConvertNav() {
   const [open, setOpen] = useState(false);
@@ -169,32 +205,52 @@ export default function ConvertNav() {
             </TabsList>
 
             {/* Tabs Content with Scrollable Data */}
-            <div className="max-h-[400px] overflow-y-auto">
+            <div className="max-h-[500px] overflow-y-auto">
               {navigation.categories.map((category) => (
                 <TabsContent
                   key={category.name}
                   value={category.name}
                   className="space-y-10 px-4 pt-10 pb-8"
                 >
-                  {category.sections.map((section) => (
-                    <div key={section.name}>
-                      <p
-                        id={`${category.id}-${section.id}-heading-mobile`}
-                        className="font-medium text-gray-900"
+                  {category.sections.map((section, index) => (
+                    <div
+                      key={section.id}
+                      className="border-t border-gray-200 px-4 py-6"
+                    >
+                      <h3 className="-mx-2 -my-3 flow-root">
+                        <button
+                          type="button"
+                          className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
+                          aria-controls={`filter-section-mobile-${index}`}
+                          aria-expanded="false"
+                        >
+                          <span className="font-medium text-gray-900">
+                            {section.name}
+                          </span>
+                          <span className="ml-6 flex items-center">
+                            <Plus className="size-5" />
+                            <Minus className="size-5 hidden" />
+                          </span>
+                        </button>
+                      </h3>
+                      <div
+                        className="pt-6"
+                        id={`filter-section-mobile-${index}`}
                       >
-                        {section.name}
-                      </p>
-                      <ul
-                        role="list"
-                        aria-labelledby={`${category.id}-${section.id}-heading-mobile`}
-                        className="mt-6 flex flex-col space-y-6"
-                      >
-                        {section.items.map((item) => (
-                          <li key={item.name} className="flow-root">
-                            {item.name}
-                          </li>
-                        ))}
-                      </ul>
+                        <div className="space-y-6">
+                          {section.items.map((section, idx) => (
+                            <div key={idx} className="flex gap-3">
+                              <Checkbox id={`${section._id}-${idx}`} />
+                              <label
+                                htmlFor={`${section._id}-${idx}`}
+                                className="min-w-0 flex-1 text-gray-500"
+                              >
+                                {section.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </TabsContent>
@@ -265,64 +321,7 @@ export default function ConvertNav() {
               </div>
 
               {/* Flyout menus */}
-              <div className="hidden lg:ml-8 lg:block lg:self-stretch">
-                <div className="flex h-full space-x-8">
-                  {navigation.categories.map((category) => (
-                    <Popover key={category.name}>
-                      <PopoverTrigger asChild>
-                        <button className="relative z-10 -mb-px flex items-center border-b-2 border-transparent pt-px text-sm font-medium text-gray-700 transition-colors duration-200 ease-out hover:text-gray-800 data-[state=open]:border-indigo-600 data-[state=open]:text-indigo-600">
-                          {category.name}
-                        </button>
-                      </PopoverTrigger>
-                      <PopoverContent className="absolute inset-x-0 top-full text-sm text-gray-500 transition data-[state=closed]:opacity-0 data-[state=open]:duration-200 data-[state=open]:ease-out data-[state=closed]:duration-150 data-[state=closed]:ease-in">
-                        <div
-                          aria-hidden="true"
-                          className="absolute inset-0 top-1/2 bg-white shadow-sm"
-                        />
-                        <div className="relative bg-white">
-                          <div className="mx-auto max-w-7xl px-8">
-                            <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-16">
-                              <div className="row-start-1 grid grid-cols-3 gap-x-8 gap-y-10 text-sm">
-                                {category.sections.map((section) => (
-                                  <div key={section.name}>
-                                    <p
-                                      id={`${section.name}-heading`}
-                                      className="font-medium text-gray-900"
-                                    >
-                                      {section.name}
-                                    </p>
-                                    <ul
-                                      role="list"
-                                      aria-labelledby={`${section.name}-heading`}
-                                      className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                    >
-                                      {section.items.map((item) => (
-                                        <li key={item.name} className="flex">
-                                          {item.name}
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </PopoverContent>
-                    </Popover>
-                  ))}
-
-                  {navigation.pages.map((page) => (
-                    <a
-                      key={page.name}
-                      href={page.href}
-                      className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                    >
-                      {page.name}
-                    </a>
-                  ))}
-                </div>
-              </div>
+              <div className="hidden lg:ml-8 lg:block lg:self-stretch"></div>
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
@@ -369,6 +368,61 @@ export default function ConvertNav() {
             </div>
           </div>
         </nav>
+        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <section aria-labelledby="products-heading" className="pt-6 pb-24">
+            <h2 id="products-heading" className="sr-only">
+              Products
+            </h2>
+            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+              {/* Filters */}
+              <form className="hidden lg:block">
+                {filters.map((filter, index) => (
+                  <div
+                    key={filter.id}
+                    className="border-b border-gray-200 py-6"
+                  >
+                    <h3 className="-my-3 flow-root">
+                      <button
+                        type="button"
+                        className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                        aria-controls={`filter-section-${index}`}
+                        aria-expanded="false"
+                      >
+                        <span className="font-medium text-gray-900">
+                          {filter.name}
+                        </span>
+                        <span className="ml-6 flex items-center">
+                          <Plus className="size-5" />
+                          <Minus className="size-5 hidden" />
+                        </span>
+                      </button>
+                    </h3>
+                    <div className="pt-6" id={`filter-section-${index}`}>
+                      <div className="space-y-4">
+                        {filter.options.map((option, idx) => (
+                          <div key={idx} className="flex gap-3">
+                            <Checkbox id={`${filter.id}-${idx}`} />
+                            <label
+                              htmlFor={`${filter.id}-${idx}`}
+                              className="text-sm text-gray-600"
+                            >
+                              {option}
+                            </label>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </form>
+              {/* Product grid */}
+              <div className="lg:col-span-3">
+                dhsfhdsgfhj
+                <div></div>
+              </div>
+            </div>
+          </section>
+        </main>
       </header>
     </div>
   );
