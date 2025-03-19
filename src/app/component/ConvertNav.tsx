@@ -318,7 +318,7 @@ export default function ConvertNav() {
                           </div>
                         </h3>
                       </CollapsibleTrigger>
-                      <CollapsibleContent>
+                      <CollapsibleContent className="pl-8">
                         <div className="pt-6" id={`filter-section-${index}`}>
                           <div className="space-y-4">
                             {section.sectionItem.map((item, idx) => (
