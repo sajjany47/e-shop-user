@@ -8,8 +8,6 @@ import {
 } from "@heroicons/react/24/outline";
 import Image from "next/image";
 import { SheetContent } from "@/components/ui/sheet";
-import { Tabs, TabsContent, TabsList } from "@/components/ui/tabs";
-import { TabsTrigger } from "@radix-ui/react-tabs";
 import { Sheet } from "@/components/ui/sheet";
 import { Minus, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
@@ -135,34 +133,15 @@ const navigation = {
   ],
 };
 
-const filters = [
-  {
-    id: "color",
-    name: "Color",
-    options: ["White", "Beige", "Blue", "Brown", "Green", "Purple"],
-  },
-  {
-    id: "category",
-    name: "Category",
-    options: ["New Arrivals", "Sale", "Travel", "Organization", "Accessories"],
-  },
-  {
-    id: "size",
-    name: "Size",
-    options: ["2L", "6L", "12L", "18L", "20L", "40L"],
-  },
-  {
-    id: "sort",
-    name: "Sort",
-    options: [
-      "Most Popular",
-      "Best Rating",
-      "Newest",
-      "Price: Low to High",
-      "Price: High to Low",
-    ],
-  },
-];
+const combileNavigation = navigation.categories.flatMap((category) =>
+  category.sections.map((section) => ({
+    categoryId: category.id,
+    categoryName: category.name,
+    sectionId: section.id,
+    sectionName: section.name,
+    sectionItem: section.items,
+  }))
+);
 
 export default function ConvertNav() {
   const [open, setOpen] = useState(false);
@@ -173,77 +152,43 @@ export default function ConvertNav() {
 
       <Sheet open={open} onOpenChange={() => setOpen(false)}>
         <SheetContent side="left">
-          <Tabs
-            defaultValue={navigation.categories[0].name}
-            className="custom-tabs mt-2"
-          >
-            {/* Tabs List with Gap */}
-            <TabsList className="border-b border-gray-200 flex gap-x-8">
-              {navigation.categories.map((category) => (
-                <TabsTrigger
-                  key={category.name}
-                  value={category.name}
-                  className="flex-1 border-b-2 border-transparent px-1 py-4 text-base font-medium whitespace-nowrap text-gray-900 data-[state=active]:border-indigo-600 data-[state=active]:text-indigo-600"
-                >
-                  {category.name}
-                </TabsTrigger>
-              ))}
-            </TabsList>
-
-            {/* Tabs Content with Scrollable Data */}
-            <div className="max-h-[500px] overflow-y-auto">
-              {navigation.categories.map((category) => (
-                <TabsContent
-                  key={category.name}
-                  value={category.name}
-                  className="space-y-10 px-4 pt-10 pb-8"
-                >
-                  {category.sections.map((section, index) => (
-                    <div
-                      key={section.id}
-                      className="border-t border-gray-200 px-4 py-6"
-                    >
-                      <h3 className="-mx-2 -my-3 flow-root">
-                        <button
-                          type="button"
-                          className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
-                          aria-controls={`filter-section-mobile-${index}`}
-                          aria-expanded="false"
+          <div className="max-h-[600px] overflow-y-auto mt-8">
+            {combileNavigation.map((section, index) => (
+              <div key={index} className="border-t border-gray-200 px-4 py-6">
+                <h3 className="-mx-2 -my-3 flow-root">
+                  <button
+                    type="button"
+                    className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
+                    aria-controls={`filter-section-mobile-${index}`}
+                    aria-expanded="false"
+                  >
+                    <span className="font-medium text-gray-900">
+                      {section.sectionName}
+                    </span>
+                    <span className="ml-6 flex items-center">
+                      <Plus className="size-5" />
+                      <Minus className="size-5 hidden" />
+                    </span>
+                  </button>
+                </h3>
+                <div className="pt-6" id={`filter-section-mobile-${index}`}>
+                  <div className="space-y-6">
+                    {section.sectionItem.map((item, idx) => (
+                      <div key={idx} className="flex gap-3">
+                        <Checkbox id={`${item._id}-${idx}`} />
+                        <label
+                          htmlFor={`${item._id}-${idx}`}
+                          className="min-w-0 flex-1 text-gray-500"
                         >
-                          <span className="font-medium text-gray-900">
-                            {section.name}
-                          </span>
-                          <span className="ml-6 flex items-center">
-                            <Plus className="size-5" />
-                            <Minus className="size-5 hidden" />
-                          </span>
-                        </button>
-                      </h3>
-                      <div
-                        className="pt-6"
-                        id={`filter-section-mobile-${index}`}
-                      >
-                        <div className="space-y-6">
-                          {section.items.map((section, idx) => (
-                            <div key={idx} className="flex gap-3">
-                              <Checkbox id={`${section._id}-${idx}`} />
-                              <label
-                                htmlFor={`${section._id}-${idx}`}
-                                className="min-w-0 flex-1 text-gray-500"
-                              >
-                                {section.name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
+                          {item.name}
+                        </label>
                       </div>
-                    </div>
-                  ))}
-                </TabsContent>
-              ))}
-            </div>
-          </Tabs>
-
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
           {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
             <div className="flow-root">
@@ -348,11 +293,8 @@ export default function ConvertNav() {
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
               {/* Filters */}
               <form className="hidden lg:block">
-                {filters.map((filter, index) => (
-                  <div
-                    key={filter.id}
-                    className="border-b border-gray-200 py-6"
-                  >
+                {combileNavigation.map((section, index) => (
+                  <div key={index} className="border-b border-gray-200 py-6">
                     <h3 className="-my-3 flow-root">
                       <button
                         type="button"
@@ -361,7 +303,7 @@ export default function ConvertNav() {
                         aria-expanded="false"
                       >
                         <span className="font-medium text-gray-900">
-                          {filter.name}
+                          {section.sectionName}
                         </span>
                         <span className="ml-6 flex items-center">
                           <Plus className="size-5" />
@@ -371,14 +313,14 @@ export default function ConvertNav() {
                     </h3>
                     <div className="pt-6" id={`filter-section-${index}`}>
                       <div className="space-y-4">
-                        {filter.options.map((option, idx) => (
+                        {section.sectionItem.map((item, idx) => (
                           <div key={idx} className="flex gap-3">
-                            <Checkbox id={`${filter.id}-${idx}`} />
+                            <Checkbox id={`${item._id}-${idx}`} />
                             <label
-                              htmlFor={`${filter.id}-${idx}`}
+                              htmlFor={`${item._id}-${idx}`}
                               className="text-sm text-gray-600"
                             >
-                              {option}
+                              {item.name}
                             </label>
                           </div>
                         ))}
