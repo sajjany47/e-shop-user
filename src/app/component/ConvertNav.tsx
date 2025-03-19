@@ -150,7 +150,16 @@ const combileNavigation = navigation.categories.flatMap((category) =>
 
 export default function ConvertNav() {
   const [open, setOpen] = useState(false);
+  const [collapsedSections, setCollapsedSections] = useState<
+    Record<string, boolean>
+  >({});
 
+  const toggleSection = (sectionId: string) => {
+    setCollapsedSections((prev) => ({
+      ...prev,
+      [sectionId]: !prev[sectionId],
+    }));
+  };
   return (
     <div className="bg-white ">
       {/* Mobile menu */}
@@ -297,7 +306,9 @@ export default function ConvertNav() {
               <form className="hidden lg:block">
                 {combileNavigation.map((section, index) => (
                   <div key={index} className="border-b border-gray-200 py-3">
-                    <Collapsible>
+                    <Collapsible
+                      onOpenChange={() => toggleSection(section.sectionId)}
+                    >
                       <CollapsibleTrigger>
                         <h3
                           className="-my-3 flow-root"
@@ -311,29 +322,34 @@ export default function ConvertNav() {
                             <span className="font-medium text-gray-900">
                               {section.sectionName}
                             </span>
-                            <span className="ml-6 flex items-center">
-                              <Plus className="size-5" />
-                              <Minus className="size-5 hidden" />
+                            <span className="ml-6 flex items-center cursor-pointer">
+                              {collapsedSections[section.sectionId] ? (
+                                <Minus className="size-5" />
+                              ) : (
+                                <Plus className="size-5" />
+                              )}
                             </span>
                           </div>
                         </h3>
                       </CollapsibleTrigger>
                       <CollapsibleContent className="pl-8">
-                        <div className="pt-6" id={`filter-section-${index}`}>
-                          <div className="space-y-4">
-                            {section.sectionItem.map((item, idx) => (
-                              <div key={idx} className="flex gap-3">
-                                <Checkbox id={`${item._id}-${idx}`} />
-                                <label
-                                  htmlFor={`${item._id}-${idx}`}
-                                  className="text-sm text-gray-600"
-                                >
-                                  {item.name}
-                                </label>
-                              </div>
-                            ))}
+                        {collapsedSections[section.sectionId] && (
+                          <div className="pt-6" id={`filter-section-${index}`}>
+                            <div className="space-y-4">
+                              {section.sectionItem.map((item, idx) => (
+                                <div key={idx} className="flex gap-3">
+                                  <Checkbox id={`${item._id}-${idx}`} />
+                                  <label
+                                    htmlFor={`${item._id}-${idx}`}
+                                    className="text-sm text-gray-600"
+                                  >
+                                    {item.name}
+                                  </label>
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
+                        )}
                       </CollapsibleContent>
                     </Collapsible>
                   </div>
