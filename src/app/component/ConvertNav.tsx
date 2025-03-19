@@ -11,6 +11,11 @@ import { SheetContent } from "@/components/ui/sheet";
 import { Sheet } from "@/components/ui/sheet";
 import { Minus, Plus } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 
 const navigation = {
   categories: [
@@ -291,38 +296,46 @@ export default function ConvertNav() {
               {/* Filters */}
               <form className="hidden lg:block">
                 {combileNavigation.map((section, index) => (
-                  <div key={index} className="border-b border-gray-200 py-6">
-                    <h3 className="-my-3 flow-root">
-                      <button
-                        type="button"
-                        className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
-                        aria-controls={`filter-section-${index}`}
-                        aria-expanded="false"
-                      >
-                        <span className="font-medium text-gray-900">
-                          {section.sectionName}
-                        </span>
-                        <span className="ml-6 flex items-center">
-                          <Plus className="size-5" />
-                          <Minus className="size-5 hidden" />
-                        </span>
-                      </button>
-                    </h3>
-                    <div className="pt-6" id={`filter-section-${index}`}>
-                      <div className="space-y-4">
-                        {section.sectionItem.map((item, idx) => (
-                          <div key={idx} className="flex gap-3">
-                            <Checkbox id={`${item._id}-${idx}`} />
-                            <label
-                              htmlFor={`${item._id}-${idx}`}
-                              className="text-sm text-gray-600"
-                            >
-                              {item.name}
-                            </label>
+                  <div key={index} className="border-b border-gray-200 py-3">
+                    <Collapsible>
+                      <CollapsibleTrigger>
+                        <h3
+                          className="-my-3 flow-root"
+                          style={{ width: "250px" }}
+                        >
+                          <div
+                            className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                            aria-controls={`filter-section-${index}`}
+                            aria-expanded="false"
+                          >
+                            <span className="font-medium text-gray-900">
+                              {section.sectionName}
+                            </span>
+                            <span className="ml-6 flex items-center">
+                              <Plus className="size-5" />
+                              <Minus className="size-5 hidden" />
+                            </span>
                           </div>
-                        ))}
-                      </div>
-                    </div>
+                        </h3>
+                      </CollapsibleTrigger>
+                      <CollapsibleContent>
+                        <div className="pt-6" id={`filter-section-${index}`}>
+                          <div className="space-y-4">
+                            {section.sectionItem.map((item, idx) => (
+                              <div key={idx} className="flex gap-3">
+                                <Checkbox id={`${item._id}-${idx}`} />
+                                <label
+                                  htmlFor={`${item._id}-${idx}`}
+                                  className="text-sm text-gray-600"
+                                >
+                                  {item.name}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </CollapsibleContent>
+                    </Collapsible>
                   </div>
                 ))}
               </form>
