@@ -160,6 +160,7 @@ export default function ConvertNav() {
       [sectionId]: !prev[sectionId],
     }));
   };
+
   return (
     <div className="bg-white ">
       {/* Mobile menu */}
@@ -169,37 +170,55 @@ export default function ConvertNav() {
           <div className="max-h-[600px] overflow-y-auto mt-8">
             {combileNavigation.map((section, index) => (
               <div key={index} className="border-t border-gray-200 px-4 py-6">
-                <h3 className="-mx-2 -my-3 flow-root">
-                  <button
-                    type="button"
-                    className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
-                    aria-controls={`filter-section-mobile-${index}`}
-                    aria-expanded="false"
-                  >
-                    <span className="font-medium text-gray-900">
-                      {section.sectionName}
-                    </span>
-                    <span className="ml-6 flex items-center">
-                      <Plus className="size-5" />
-                      <Minus className="size-5 hidden" />
-                    </span>
-                  </button>
-                </h3>
-                <div className="pt-6" id={`filter-section-mobile-${index}`}>
-                  <div className="space-y-6">
-                    {section.sectionItem.map((item, idx) => (
-                      <div key={idx} className="flex gap-3">
-                        <Checkbox id={`${item._id}-${idx}`} />
-                        <label
-                          htmlFor={`${item._id}-${idx}`}
-                          className="min-w-0 flex-1 text-gray-500"
-                        >
-                          {item.name}
-                        </label>
+                <Collapsible
+                  onOpenChange={() => toggleSection(section.sectionId)}
+                >
+                  <CollapsibleTrigger>
+                    <h3
+                      className="-mx-2 -my-3 flow-root"
+                      style={{ width: "250px" }}
+                    >
+                      <div
+                        className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
+                        aria-controls={`filter-section-mobile-${index}`}
+                        aria-expanded="false"
+                      >
+                        <span className="font-medium text-gray-900">
+                          {section.sectionName}
+                        </span>
+                        <span className="ml-6 flex items-center">
+                          {collapsedSections[section.sectionId] ? (
+                            <Minus className="size-5" />
+                          ) : (
+                            <Plus className="size-5" />
+                          )}
+                        </span>
                       </div>
-                    ))}
-                  </div>
-                </div>
+                    </h3>
+                  </CollapsibleTrigger>
+                  <CollapsibleContent className="pl-8">
+                    {collapsedSections[section.sectionId] && (
+                      <div
+                        className="pt-6"
+                        id={`filter-section-mobile-${index}`}
+                      >
+                        <div className="space-y-6">
+                          {section.sectionItem.map((item, idx) => (
+                            <div key={idx} className="flex gap-3">
+                              <Checkbox id={`${item._id}-${idx}`} />
+                              <label
+                                htmlFor={`${item._id}-${idx}`}
+                                className="min-w-0 flex-1 text-gray-500"
+                              >
+                                {item.name}
+                              </label>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </CollapsibleContent>
+                </Collapsible>
               </div>
             ))}
           </div>
