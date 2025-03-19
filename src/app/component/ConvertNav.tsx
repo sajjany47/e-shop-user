@@ -162,7 +162,7 @@ export default function ConvertNav() {
   };
 
   return (
-    <div className="bg-white ">
+    <div className="bg-white">
       {/* Mobile menu */}
 
       <Sheet open={open} onOpenChange={() => setOpen(false)}>
@@ -238,7 +238,7 @@ export default function ConvertNav() {
         </SheetContent>
       </Sheet>
 
-      <header className="relative bg-white">
+      <header className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
         <p className="flex h-10 items-center justify-center bg-indigo-600 px-4 text-sm font-medium text-white sm:px-6 lg:px-8">
           Get free delivery on orders over $100
         </p>
@@ -318,71 +318,117 @@ export default function ConvertNav() {
             </div>
           </div>
         </nav>
-        <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <section aria-labelledby="products-heading" className="pt-6 pb-24">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
-              <form className="hidden lg:block">
-                {combileNavigation.map((section, index) => (
-                  <div key={index} className="border-b border-gray-200 py-3">
-                    <Collapsible
-                      onOpenChange={() => toggleSection(section.sectionId)}
-                    >
-                      <CollapsibleTrigger>
-                        <h3
-                          className="-my-3 flow-root"
-                          style={{ width: "250px" }}
-                        >
-                          <div
-                            className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
-                            aria-controls={`filter-section-${index}`}
-                            aria-expanded="false"
-                          >
-                            <span className="font-medium text-gray-900">
-                              {section.sectionName}
-                            </span>
-                            <span className="ml-6 flex items-center cursor-pointer">
-                              {collapsedSections[section.sectionId] ? (
-                                <Minus className="size-5" />
-                              ) : (
-                                <Plus className="size-5" />
-                              )}
-                            </span>
-                          </div>
-                        </h3>
-                      </CollapsibleTrigger>
-                      <CollapsibleContent className="pl-8">
-                        {collapsedSections[section.sectionId] && (
-                          <div className="pt-6" id={`filter-section-${index}`}>
-                            <div className="space-y-4">
-                              {section.sectionItem.map((item, idx) => (
-                                <div key={idx} className="flex gap-3">
-                                  <Checkbox id={`${item._id}-${idx}`} />
-                                  <label
-                                    htmlFor={`${item._id}-${idx}`}
-                                    className="text-sm text-gray-600"
-                                  >
-                                    {item.name}
-                                  </label>
-                                </div>
-                              ))}
-                            </div>
-                          </div>
-                        )}
-                      </CollapsibleContent>
-                    </Collapsible>
-                  </div>
-                ))}
-              </form>
-              {/* Product grid */}
-              <div className="lg:col-span-3">
-                dhsfhdsgfhj
-                <div></div>
-              </div>
-            </div>
-          </section>
-        </main>
       </header>
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
+        <section aria-labelledby="products-heading" className="pt-6 pb-24">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+            {/* Filters */}
+            <form className="hidden lg:block">
+              {combileNavigation.map((section, index) => (
+                <div key={index} className="border-b border-gray-200 py-6">
+                  <Collapsible
+                    onOpenChange={() => toggleSection(section.sectionId)}
+                  >
+                    <CollapsibleTrigger>
+                      <h3
+                        className="-my-3 flow-root"
+                        style={{ width: "250px" }}
+                      >
+                        <div
+                          className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
+                          aria-controls={`filter-section-${index}`}
+                          aria-expanded="false"
+                        >
+                          <span className="font-medium text-gray-900">
+                            {section.sectionName}
+                          </span>
+                          <span className="ml-6 flex items-center cursor-pointer">
+                            {collapsedSections[section.sectionId] ? (
+                              <Minus className="size-5" />
+                            ) : (
+                              <Plus className="size-5" />
+                            )}
+                          </span>
+                        </div>
+                      </h3>
+                    </CollapsibleTrigger>
+                    <CollapsibleContent className="pl-8">
+                      {collapsedSections[section.sectionId] && (
+                        <div className="pt-6" id={`filter-section-${index}`}>
+                          <div className="space-y-4">
+                            {section.sectionItem.map((item, idx) => (
+                              <div key={idx} className="flex gap-3">
+                                <Checkbox id={`${item._id}-${idx}`} />
+                                <label
+                                  htmlFor={`${item._id}-${idx}`}
+                                  className="text-sm text-gray-600"
+                                >
+                                  {item.name}
+                                </label>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </CollapsibleContent>
+                  </Collapsible>
+                </div>
+              ))}
+            </form>
+            {/* Product grid */}
+            <div className="lg:col-span-3">
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+              <div> dhsfhdsgfhj</div>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   );
 }
