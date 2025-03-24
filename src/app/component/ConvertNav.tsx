@@ -323,7 +323,7 @@ export default function ConvertNav() {
         <section aria-labelledby="products-heading" className="pt-6 pb-24">
           <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
             {/* Sidebar */}
-            <aside className="hidden lg:block fixed top-24 left-0 h-[calc(100vh-6rem)] w-1/4 overflow-y-auto border-r border-gray-200 bg-white">
+            <aside className="hidden lg:block fixed top-24 left-0 h-[calc(100vh-6rem)] w-1/7 overflow-y-auto border-r border-gray-200 bg-white">
               <form>
                 {combileNavigation.map((section, index) => (
                   <div
@@ -334,7 +334,10 @@ export default function ConvertNav() {
                       onOpenChange={() => toggleSection(section.sectionId)}
                     >
                       <CollapsibleTrigger>
-                        <h3 className="-my-3 flow-root">
+                        <h3
+                          className="-my-3 flow-root"
+                          style={{ width: "170px" }}
+                        >
                           <div
                             className="flex w-full items-center justify-between bg-white py-3 text-sm text-gray-400 hover:text-gray-500"
                             aria-controls={`filter-section-${index}`}
@@ -378,7 +381,7 @@ export default function ConvertNav() {
               </form>
             </aside>
             {/* Product grid */}
-            <div className="lg:col-span-3 lg:ml-[25%]">
+            <div className="lg:col-span-3 lg:ml-[11%]">
               <div> dhsfhdsgfhj</div>
               <div> dhsfhdsgfhj</div>
               <div> dhsfhdsgfhj</div>
