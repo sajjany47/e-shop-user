@@ -16,6 +16,7 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
+import ProductView from "./ProductView";
 
 const navigation = {
   categories: [
@@ -382,54 +383,7 @@ export default function ConvertNav() {
             </aside>
             {/* Product grid */}
             <div className="lg:col-span-3 lg:ml-[11%]">
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
-              <div> dhsfhdsgfhj</div>
+              <ProductView />
             </div>
           </div>
         </section>
