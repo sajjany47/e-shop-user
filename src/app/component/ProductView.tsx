@@ -3,7 +3,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Eye, Heart, Check } from "lucide-react";
 import { useState } from "react";
 
-const ProductView = (props) => {
+const ProductView = (props: any) => {
   const [showFullDescription, setShowFullDescription] = useState(false);
   const data = props.data;
   return (
