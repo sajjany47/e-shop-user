@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Bars3Icon,
   MagnifyingGlassIcon,
@@ -17,6 +17,8 @@ import {
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
 import ProductView from "./ProductView";
+import { ProductList } from "../Products/ProductService";
+import Swal from "sweetalert2";
 
 const navigation = {
   categories: [
@@ -151,9 +153,23 @@ const combileNavigation = navigation.categories.flatMap((category) =>
 
 export default function ConvertNav() {
   const [open, setOpen] = useState(false);
+  const [list, setList] = useState([]);
   const [collapsedSections, setCollapsedSections] = useState<
     Record<string, boolean>
   >({});
+
+  useEffect(() => {
+    ProductList()
+      .then((res) => {
+        setList(res);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: error.mesaage,
+          icon: "error",
+        });
+      });
+  }, []);
 
   const toggleSection = (sectionId: string) => {
     setCollapsedSections((prev) => ({
@@ -384,15 +400,11 @@ export default function ConvertNav() {
             {/* Product grid */}
             <div className="lg:col-span-3 lg:ml-[11%]">
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div>
-                  <ProductView />
-                </div>
-                <div>
-                  <ProductView />
-                </div>
-                <div>
-                  <ProductView />
-                </div>
+                {list.map((item, index) => (
+                  <div key={index}>
+                    <ProductView data={item} />
+                  </div>
+                ))}
               </div>
             </div>
           </div>

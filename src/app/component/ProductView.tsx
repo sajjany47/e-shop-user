@@ -1,15 +1,18 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Eye, Heart, Check } from "lucide-react";
+import { useState } from "react";
 
-const ProductView = () => {
+const ProductView = (props) => {
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const data = props.data;
   return (
     <Card>
       <div className="h-56 w-full">
         <img
           className="mx-auto h-full object-cover"
-          src="https://rukminim2.flixcart.com/image/312/312/xif0q/computer/k/8/k/15-fa1226tx-gaming-laptop-hp-original-imah4bjbx8ctzdg6.jpeg"
-          alt="HP Victus Gaming Laptop"
+          src={data.image}
+          alt={data.title}
         />
       </div>
       <CardContent className="pt-6">
@@ -26,18 +29,30 @@ const ProductView = () => {
             </Button>
           </div>
         </div>
-        <h1 className="text-2xl font-bold mb-2">HP Victus Gaming Laptop</h1>
+        <h1 className="text-2xl font-bold mb-2"> {data.title}</h1>
         <p className="text-sm text-gray-500 mb-4">
-          Intel Core i5 12th Gen 12450H - (8 GB/512 GB SSD/Windows 11 Home/4 GB
-          Graphics/NVIDIA GeForce RTX 2050)
+          {showFullDescription
+            ? data?.description
+            : `${data?.description?.slice(0, 120)}...`}
+          {data?.description?.length > 100 && (
+            <span
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              style={{ color: "blue", cursor: "pointer" }}
+            >
+              {showFullDescription ? " View Less" : " View More"}
+            </span>
+          )}
+          {/* {data.description} */}
         </p>
         <div className="flex items-center mb-4">
           <span className="bg-green-500 text-white text-sm font-semibold px-2.5 py-0.5 rounded">
-            4.5 ★
+            {data.rating.rate} ★
           </span>
-          <span className="text-sm text-gray-500 ml-2">1,234 reviews</span>
+          <span className="text-sm text-gray-500 ml-2">
+            {data.rating.count} reviews
+          </span>
         </div>
-        <ul className="text-sm text-gray-700 mb-6 space-y-1">
+        {/* <ul className="text-sm text-gray-700 mb-6 space-y-1">
           {[
             "Core i5 Processor (12th Gen)",
             "8 GB DDR4 RAM",
@@ -49,12 +64,15 @@ const ProductView = () => {
               {feature}
             </li>
           ))}
-        </ul>
+        </ul> */}
         <div className="flex items-center justify-between mb-4">
           <div>
-            <span className="text-3xl font-bold text-gray-900">$899.00</span>
+            <span className="text-3xl font-bold text-gray-900">
+              {" "}
+              ₹{data.price * 80}
+            </span>
             <span className="ml-2 text-sm font-medium text-gray-500 line-through">
-              $1,000.00
+              ₹{data.price * 80 + 113}
             </span>
           </div>
           <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">
