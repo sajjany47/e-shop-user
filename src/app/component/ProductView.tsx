@@ -69,10 +69,10 @@ const ProductView = (props) => {
           <div>
             <span className="text-3xl font-bold text-gray-900">
               {" "}
-              ₹{data.price * 80}
+              ₹{(data.price * 80).toFixed(2)}
             </span>
             <span className="ml-2 text-sm font-medium text-gray-500 line-through">
-              ₹{data.price * 80 + 113}
+              ₹{(data.price * 80 + 113).toFixed(2)}
             </span>
           </div>
           <span className="bg-red-100 text-red-800 text-xs font-semibold px-2.5 py-0.5 rounded">
