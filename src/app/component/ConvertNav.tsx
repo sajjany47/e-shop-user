@@ -322,7 +322,7 @@ export default function ConvertNav() {
       </header>
       <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
         <section aria-labelledby="products-heading" className="pt-6 pb-24">
-          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-2">
             {/* Sidebar */}
             <aside className="hidden lg:block fixed top-24 left-0 h-[calc(100vh-6rem)] w-1/7 overflow-y-auto border-r border-gray-200 bg-white">
               <form>
