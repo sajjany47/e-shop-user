@@ -1,11 +1,23 @@
+"use client";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Eye, Heart, Check } from "lucide-react";
-import { useState } from "react";
 
 const ProductView = (props: any) => {
-  const [showFullDescription, setShowFullDescription] = useState(false);
   const data = props.data;
+  const [showFullDescription, setShowFullDescription] = useState(false);
+  const [quantity, setQuantity] = useState(0);
+
+  const handleIncrease = () => {
+    setQuantity((prev) => prev + 1);
+  };
+
+  const handleDecrease = () => {
+    if (quantity > 0) {
+      setQuantity((prev) => prev - 1);
+    }
+  };
   return (
     <Card>
       <div className="h-56 w-full">
@@ -86,9 +98,25 @@ const ProductView = (props: any) => {
           <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
             Buy Now
           </Button>
-          <Button variant="outline" className="flex-1">
-            Add to Cart
-          </Button>
+          {quantity > 0 ? (
+            <div className="flex items-center space-x-2">
+              <Button onClick={handleDecrease} variant="secondary">
+                -
+              </Button>
+              <span className="text-lg font-semibold">{quantity}</span>
+              <Button onClick={handleIncrease} variant="secondary">
+                +
+              </Button>
+            </div>
+          ) : (
+            <Button
+              onClick={handleIncrease}
+              variant="outline"
+              className="flex-1"
+            >
+              Add to Cart
+            </Button>
+          )}
         </div>
       </CardContent>
     </Card>

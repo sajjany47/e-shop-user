@@ -8,3 +8,12 @@ export const ProductList = async () => {
   );
   return response.data;
 };
+
+export const AddCart = async (payload: any) => {
+  const response = await axios.post(
+    `${BASE_URL}/carts`,
+    payload,
+    headerWithOutToken()
+  );
+  return response.data;
+};

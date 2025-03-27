@@ -19,6 +19,8 @@ import {
 import ProductView from "./ProductView";
 import { ProductList } from "../Products/ProductService";
 import Swal from "sweetalert2";
+import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 
 const navigation = {
   categories: [
@@ -152,6 +154,7 @@ const combileNavigation = navigation.categories.flatMap((category) =>
 );
 
 export default function ConvertNav() {
+  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
   const [collapsedSections, setCollapsedSections] = useState<
@@ -292,19 +295,20 @@ export default function ConvertNav() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <a
-                    href="#"
+                  <Button
+                    variant="ghost"
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                    onClick={() => router.push("/log")}
                   >
                     Sign in
-                  </a>
+                  </Button>
                   <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <a
-                    href="#"
+                  <Button
+                    variant="ghost"
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
                   >
                     Create account
-                  </a>
+                  </Button>
                 </div>
 
                 {/* Search */}
