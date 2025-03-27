@@ -9,13 +9,18 @@ import {
   PURGE,
   REGISTER,
 } from "redux-persist";
+import CartReducer from "./reducer/CartReducer";
+import UserReducer from "./reducer/UserReducer";
 
 const persistConfig = {
   key: "root",
   storage,
 };
 
-const rootReducer = combineReducers({});
+const rootReducer = combineReducers({
+  user: UserReducer,
+  cart: CartReducer,
+});
 
 const persistReducers = persistReducer(persistConfig, rootReducer);
 
