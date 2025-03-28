@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Input } from "@/components/ui/input";
 import { FieldInputProps, FormikProps, getIn } from "formik";
 import { Label } from "@/components/ui/label";
