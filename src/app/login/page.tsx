@@ -4,7 +4,11 @@ import { LoginForm } from "../component/LoginForm";
 const Login = () => {
   return (
     <>
-      <LoginForm />
+      <div className="flex min-h-svh w-full items-center justify-center p-6 md:p-10">
+        <div className="w-full max-w-sm">
+          <LoginForm />
+        </div>
+      </div>
     </>
   );
 };

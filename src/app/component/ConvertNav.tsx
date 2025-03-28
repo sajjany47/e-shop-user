@@ -298,7 +298,7 @@ export default function ConvertNav() {
                   <Button
                     variant="ghost"
                     className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                    onClick={() => router.push("/log")}
+                    onClick={() => router.push("/login")}
                   >
                     Sign in
                   </Button>
