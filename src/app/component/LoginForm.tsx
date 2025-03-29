@@ -1,9 +1,10 @@
+"use client";
+import { Field, Form, Formik } from "formik";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import * as Yup from "yup";
 import { InputField } from "./CustomField";
-import { Field, Form, Formik } from "formik";
 
 interface LoginValues {
   username: string;
@@ -69,30 +70,27 @@ export function LoginForm({
             {({ handleSubmit }) => (
               <Form onSubmit={handleSubmit} autoComplete="off">
                 <div className="flex flex-col gap-6">
-                  <div className="grid gap-2">
+                  <Field
+                    label={"Username"}
+                    name="username"
+                    component={InputField}
+                    placeholder={"Username"}
+                  />
+
+                  <div className="flex flex-col gap-2">
                     <Field
-                      label={"Username"}
-                      name="username"
+                      label={"Password"}
+                      name="password"
                       component={InputField}
-                      placeholder={"Username"}
+                      placeholder={"Password"}
+                      type="password"
                     />
-                  </div>
-                  <div className="grid gap-2">
-                    <div className="flex items-center">
-                      <Field
-                        label={"Password"}
-                        name="password"
-                        component={InputField}
-                        placeholder={"Password"}
-                        type="password"
-                      />
-                      <a
-                        href="#"
-                        className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                      >
-                        Forgot your password?
-                      </a>
-                    </div>
+                    <a
+                      href="#"
+                      className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
+                    >
+                      Forgot your password?
+                    </a>
                   </div>
                   <Button type="submit" className="w-full">
                     Login
