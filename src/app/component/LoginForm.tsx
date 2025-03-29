@@ -5,48 +5,48 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import * as Yup from "yup";
 import { InputField } from "./CustomField";
+import { LogIn } from "../login/AuthService";
+import Swal from "sweetalert2";
+import { useDispatch } from "react-redux";
+import { setUser } from "@/store/reducer/UserReducer";
 
 interface LoginValues {
   username: string;
   password: string;
 }
+
+const validationSchema = Yup.object({
+  username: Yup.string().required("Username is required"),
+  password: Yup.string()
+    .min(6, "Password must be at least 6 characters")
+    .required("Password is required"),
+});
 export function LoginForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const validationSchema = Yup.object({
-    username: Yup.string().required("Username is required"),
-    password: Yup.string()
-      .min(6, "Password must be at least 6 characters")
-      .required("Password is required"),
-  });
+  const dispatch = useDispatch();
 
   const handelLogin = (values: LoginValues) => {
-    console.log(values);
-    // userLogin(values)
-    //   .then((res) => {
-    //     sessionStorage.setItem("accessToken", res.data.token.accessToken);
-    //     sessionStorage.setItem("refreshToken", res.data.token.refreshToken);
-    //     dispatch(
-    //       setUser({
-    //         data: res.data.data,
-    //         acccessToken: res.data.token.accessToken,
-    //         refreshToken: res.data.token.refreshToken,
-    //       })
-    //     );
-    //     router.push("/home");
-    //   })
-    //   .catch((err) => {
-    //     toast.error(err.response.data.error ?? err.message, {
-    //       position: "top-right",
-    //       autoClose: 5000,
-    //       hideProgressBar: false,
-    //       closeOnClick: false,
-    //       pauseOnHover: true,
-    //       draggable: true,
-    //       theme: "colored",
-    //     });
-    //   });
+    LogIn(values)
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("accessToken", res.token);
+        sessionStorage.setItem("refreshToken", res.token);
+        dispatch(
+          setUser({
+            data: {},
+            token: { acccessToken: res.token, refreshToken: res.token },
+          })
+        );
+        // router.push("/home");
+      })
+      .catch((err) => {
+        Swal.fire({
+          title: err.response.data.error ?? err.message,
+          icon: "error",
+        });
+      });
   };
 
   return (
