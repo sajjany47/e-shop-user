@@ -9,3 +9,11 @@ export const LogIn = async (payload: any) => {
   );
   return response.data;
 };
+
+export const UserDetails = async (id: any) => {
+  const response = await axios.get(
+    `${BASE_URL}/users/${id}`,
+    headerWithOutToken()
+  );
+  return response.data;
+};

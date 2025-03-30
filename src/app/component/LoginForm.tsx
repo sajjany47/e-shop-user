@@ -5,10 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import * as Yup from "yup";
 import { InputField } from "./CustomField";
-import { LogIn } from "../login/AuthService";
+import { LogIn, UserDetails } from "../login/AuthService";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
 import { setData, setToken } from "@/store/reducer/UserReducer";
+import { jwtDecode } from "jwt-decode";
+import { CartDetails } from "../Products/ProductService";
+import { setCart, setProduct } from "@/store/reducer/CartReducer";
 
 interface LoginValues {
   username: string;
@@ -30,10 +33,33 @@ export function LoginForm({
   const handelLogin = (values: LoginValues) => {
     LogIn(values)
       .then((res) => {
-        console.log(res);
         sessionStorage.setItem("accessToken", res.token);
         sessionStorage.setItem("refreshToken", res.token);
-        dispatch(setData({}));
+        const decoded = jwtDecode(res.token) as any;
+        if (decoded) {
+          UserDetails(decoded.sub)
+            .then((elm) => {
+              dispatch(setData(elm));
+              CartDetails(elm.id)
+                .then((item) => {
+                  dispatch(setCart(item.products.length));
+                  dispatch(setProduct(item.products));
+                })
+                .catch((itemErr) => {
+                  Swal.fire({
+                    title: itemErr.response.data.error ?? itemErr.message,
+                    icon: "error",
+                  });
+                });
+            })
+            .catch((elmErr) => {
+              Swal.fire({
+                title: elmErr.response.data.error ?? elmErr.message,
+                icon: "error",
+              });
+            });
+        }
+
         dispatch(
           setToken({
             acccessToken: res.token,

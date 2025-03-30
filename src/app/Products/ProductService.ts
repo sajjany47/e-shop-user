@@ -17,3 +17,11 @@ export const AddCart = async (payload: any) => {
   );
   return response.data;
 };
+
+export const CartDetails = async (id: any) => {
+  const response = await axios.get(
+    `${BASE_URL}/carts/${id}`,
+    headerWithOutToken()
+  );
+  return response.data;
+};
