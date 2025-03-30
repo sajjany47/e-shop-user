@@ -8,7 +8,7 @@ import { InputField } from "./CustomField";
 import { LogIn } from "../login/AuthService";
 import Swal from "sweetalert2";
 import { useDispatch } from "react-redux";
-import { setUser } from "@/store/reducer/UserReducer";
+import { setData, setToken } from "@/store/reducer/UserReducer";
 
 interface LoginValues {
   username: string;
@@ -33,10 +33,11 @@ export function LoginForm({
         console.log(res);
         sessionStorage.setItem("accessToken", res.token);
         sessionStorage.setItem("refreshToken", res.token);
+        dispatch(setData({}));
         dispatch(
-          setUser({
-            data: {},
-            token: { acccessToken: res.token, refreshToken: res.token },
+          setToken({
+            acccessToken: res.token,
+            refreshToken: res.token,
           })
         );
         // router.push("/home");
