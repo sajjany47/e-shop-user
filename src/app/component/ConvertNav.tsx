@@ -21,6 +21,15 @@ import { ProductList } from "../Products/ProductService";
 import Swal from "sweetalert2";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
+import { useSelector } from "react-redux";
+import {
+  Menubar,
+  MenubarContent,
+  MenubarItem,
+  MenubarMenu,
+  MenubarTrigger,
+} from "@/components/ui/menubar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 const navigation = {
   categories: [
@@ -154,6 +163,7 @@ const combileNavigation = navigation.categories.flatMap((category) =>
 );
 
 export default function ConvertNav() {
+  const userDetails = useSelector((state: any) => state?.user);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
@@ -244,16 +254,48 @@ export default function ConvertNav() {
           </div>
           {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-            <div className="flow-root">
-              <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                Sign in
-              </a>
-            </div>
-            <div className="flow-root">
-              <a href="#" className="-m-2 block p-2 font-medium text-gray-900">
-                Create account
-              </a>
-            </div>
+            {userDetails?.user?.token.acccessToken ? (
+              <Menubar>
+                <MenubarMenu>
+                  <small className="text-center">
+                    <b>{userDetails.data.username}</b>
+                    <br />
+                    <small>{userDetails.data.position}</small>
+                  </small>
+                  <MenubarTrigger>
+                    <Avatar>
+                      <AvatarImage src="https://github.com/shadcn.png" />
+                      <AvatarFallback>CN</AvatarFallback>
+                    </Avatar>
+                  </MenubarTrigger>
+                  <MenubarContent>
+                    <MenubarItem>Password</MenubarItem>
+                    <MenubarItem>Setting</MenubarItem>
+                    <MenubarItem>Logout</MenubarItem>
+                  </MenubarContent>
+                </MenubarMenu>
+              </Menubar>
+            ) : (
+              <>
+                <div className="flow-root">
+                  <Button
+                    variant="ghost"
+                    className="-m-2 block p-2 font-medium text-gray-900"
+                    onClick={() => router.push("/login")}
+                  >
+                    Sign in
+                  </Button>
+                </div>
+                <div className="flow-root">
+                  <a
+                    href="#"
+                    className="-m-2 block p-2 font-medium text-gray-900"
+                  >
+                    Create account
+                  </a>
+                </div>
+              </>
+            )}
           </div>
         </SheetContent>
       </Sheet>
@@ -295,20 +337,48 @@ export default function ConvertNav() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  <Button
-                    variant="ghost"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                    onClick={() => router.push("/login")}
-                  >
-                    Sign in
-                  </Button>
-                  <span aria-hidden="true" className="h-6 w-px bg-gray-200" />
-                  <Button
-                    variant="ghost"
-                    className="text-sm font-medium text-gray-700 hover:text-gray-800"
-                  >
-                    Create account
-                  </Button>
+                  {userDetails?.user?.token.acccessToken ? (
+                    <Menubar>
+                      <MenubarMenu>
+                        <small className="text-center">
+                          <b>{userDetails.data.username}</b>
+                          <br />
+                          <small>{userDetails.data.position}</small>
+                        </small>
+                        <MenubarTrigger>
+                          <Avatar>
+                            <AvatarImage src="https://github.com/shadcn.png" />
+                            <AvatarFallback>CN</AvatarFallback>
+                          </Avatar>
+                        </MenubarTrigger>
+                        <MenubarContent>
+                          <MenubarItem>Password</MenubarItem>
+                          <MenubarItem>Setting</MenubarItem>
+                          <MenubarItem>Logout</MenubarItem>
+                        </MenubarContent>
+                      </MenubarMenu>
+                    </Menubar>
+                  ) : (
+                    <>
+                      <Button
+                        variant="ghost"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                        onClick={() => router.push("/login")}
+                      >
+                        Sign in
+                      </Button>
+                      <span
+                        aria-hidden="true"
+                        className="h-6 w-px bg-gray-200"
+                      />
+                      <Button
+                        variant="ghost"
+                        className="text-sm font-medium text-gray-700 hover:text-gray-800"
+                      >
+                        Create account
+                      </Button>
+                    </>
+                  )}
                 </div>
 
                 {/* Search */}
