@@ -12,6 +12,7 @@ import { setData, setToken } from "@/store/reducer/UserReducer";
 import { jwtDecode } from "jwt-decode";
 import { CartDetails } from "../Products/ProductService";
 import { setCart, setProduct } from "@/store/reducer/CartReducer";
+import { useRouter } from "next/navigation";
 
 interface LoginValues {
   username: string;
@@ -29,6 +30,7 @@ export function LoginForm({
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
   const dispatch = useDispatch();
+  const router = useRouter();
 
   const handelLogin = (values: LoginValues) => {
     LogIn(values)
@@ -66,7 +68,7 @@ export function LoginForm({
             refreshToken: res.token,
           })
         );
-        // router.push("/home");
+        router.push("/");
       })
       .catch((err) => {
         Swal.fire({
