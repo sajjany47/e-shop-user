@@ -254,7 +254,7 @@ export default function ConvertNav() {
           </div>
           {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6">
-            {userDetails?.user?.token.acccessToken ? (
+            {userDetails?.token.acccessToken ? (
               <Menubar>
                 <MenubarMenu>
                   <small className="text-center">
@@ -337,7 +337,7 @@ export default function ConvertNav() {
 
               <div className="ml-auto flex items-center">
                 <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                  {userDetails?.user?.token.acccessToken ? (
+                  {userDetails?.token.acccessToken ? (
                     <Menubar>
                       <MenubarMenu>
                         <small className="text-center">
