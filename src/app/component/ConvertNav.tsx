@@ -164,6 +164,7 @@ const combileNavigation = navigation.categories.flatMap((category) =>
 
 export default function ConvertNav() {
   const userDetails = useSelector((state: any) => state?.user);
+  const cartDetails = useSelector((state: any) => state?.cart);
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [list, setList] = useState([]);
@@ -260,7 +261,7 @@ export default function ConvertNav() {
                   <small className="text-center">
                     <b>{userDetails.data.username}</b>
                     <br />
-                    <small>{userDetails.data.position}</small>
+                    {/* <small>{userDetails.data.position}</small> */}
                   </small>
                   <MenubarTrigger>
                     <Avatar>
@@ -343,7 +344,7 @@ export default function ConvertNav() {
                         <small className="text-center">
                           <b>{userDetails.data.username}</b>
                           <br />
-                          <small>{userDetails.data.position}</small>
+                          {/* <small>{userDetails.data.position}</small> */}
                         </small>
                         <MenubarTrigger>
                           <Avatar>
@@ -400,7 +401,7 @@ export default function ConvertNav() {
                       className="size-6 shrink-0 text-gray-400 group-hover:text-gray-500"
                     />
                     <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">
-                      0
+                      {cartDetails?.cartNumber || 0}
                     </span>
                     <span className="sr-only">items in cart, view bag</span>
                   </a>
