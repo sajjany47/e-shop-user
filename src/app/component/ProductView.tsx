@@ -39,7 +39,7 @@ const ProductView = (props: any) => {
             <Button
               variant="ghost"
               size="icon"
-              onClick={() => router.push(`/products/${data.id}`)}
+              onClick={() => router.push(`/Products/${data.id}`)}
             >
               <Eye className="h-5 w-5" />
             </Button>
