@@ -253,7 +253,7 @@ export default function ConvertNav() {
             ))}
           </div>
           {/* Auth Links */}
-          <div className="space-y-6 border-t border-gray-200 px-4 py-6">
+          <div className="space-y-6 border-t border-gray-200 px-4 py-6 cutom-avatar">
             {userDetails?.token.acccessToken ? (
               <Menubar>
                 <MenubarMenu>
@@ -283,7 +283,7 @@ export default function ConvertNav() {
                     className="-m-2 block p-2 font-medium text-gray-900"
                     onClick={() => router.push("/login")}
                   >
-                    Sign in
+                    <strong>Sign in</strong>
                   </Button>
                 </div>
                 <div className="flow-root">
@@ -291,7 +291,7 @@ export default function ConvertNav() {
                     href="#"
                     className="-m-2 block p-2 font-medium text-gray-900"
                   >
-                    Create account
+                    <strong>Create account</strong>
                   </a>
                 </div>
               </>
@@ -336,7 +336,7 @@ export default function ConvertNav() {
               <div className="hidden lg:ml-8 lg:block lg:self-stretch"></div>
 
               <div className="ml-auto flex items-center">
-                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6 cutom-avatar">
                   {userDetails?.token.acccessToken ? (
                     <Menubar>
                       <MenubarMenu>

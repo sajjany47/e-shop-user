@@ -151,4 +151,7 @@
 .swal2-container {
   z-index: 99999 !important;
 }
+.cutom-avatar .border {
 
+  border-width: 0px;
+}
