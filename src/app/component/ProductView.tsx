@@ -1,10 +1,13 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Eye, Heart, Check } from "lucide-react";
+import { Eye, Heart } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 const ProductView = (props: any) => {
+  const router = useRouter();
   const data = props.data;
   const [showFullDescription, setShowFullDescription] = useState(false);
   const [quantity, setQuantity] = useState(0);
@@ -33,7 +36,11 @@ const ProductView = (props: any) => {
             Up to 35% off
           </span>
           <div className="flex gap-2">
-            <Button variant="ghost" size="icon">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => router.push(`/products/${data.id}`)}
+            >
               <Eye className="h-5 w-5" />
             </Button>
             <Button variant="ghost" size="icon">
