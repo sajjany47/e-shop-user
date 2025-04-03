@@ -73,7 +73,7 @@ export function LoginForm({
           })
         );
         setLoadIng(false);
-        router.push("/");
+        router.push("/Products/home");
       })
       .catch((err) => {
         setLoadIng(false);

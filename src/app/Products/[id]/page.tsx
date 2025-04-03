@@ -10,9 +10,9 @@ interface ProductDetailsParams {
 const ProductDetails = ({ params }: ProductDetailsParams) => {
   console.log(params.id);
   return (
-    <>
+    <div className="mt-8">
       <ProductOverview />
-    </>
+    </div>
   );
 };
 
