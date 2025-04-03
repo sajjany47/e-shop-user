@@ -62,29 +62,6 @@ const ProductOverview = () => {
                 </h2>
                 <p className="text-base text-gray-500">ABS LUGGAGE</p>
               </div>
-              <Button variant="ghost" className="p-0.5">
-                <svg
-                  width="60"
-                  height="60"
-                  viewBox="0 0 60 60"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <circle
-                    cx="30"
-                    cy="30"
-                    r="30"
-                    className="fill-indigo-50 group-hover:fill-indigo-100 transition-all duration-500"
-                  />
-                  <path
-                    d="M21.4709 31.3196L30.0282 39.7501L38.96 30.9506M30.0035 22.0789C32.4787 19.6404 36.5008 19.6404 38.976 22.0789C41.4512 24.5254 41.4512 28.4799 38.9842 30.9265M29.9956 22.0789C27.5205 19.6404 23.4983 19.6404 21.0231 22.0789C18.548 24.5174 18.548 28.4799 21.0231 30.9184M21.0231 30.9184L21.0441 30.939M21.0231 30.9184L21.4628 31.3115"
-                    className="stroke-indigo-600 group-hover:stroke-indigo-700 transition-all duration-500"
-                    strokeWidth="1.6"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  />
-                </svg>
-              </Button>
             </div>
 
             <div className="flex items-center gap-4 mb-8">
@@ -137,7 +114,7 @@ const ProductOverview = () => {
                   +
                 </Button>
               </div>
-              <Button variant="secondary" className="w-full">
+              <Button variant="secondary" className="w-1/2">
                 Add to Cart
               </Button>
             </div>

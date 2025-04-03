@@ -6,11 +6,13 @@ export default function ProductLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className="bg-white">
+    <>
       {/* Mobile menu */}
 
       <Navbar />
-      <main>{children}</main>
-    </div>
+      <main className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-24">
+        {children}
+      </main>
+    </>
   );
 }
