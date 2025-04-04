@@ -1,25 +1,47 @@
 /* eslint-disable @next/next/no-img-element */
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { RelativeData } from "@/shared/StaticData";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
+import { ProductDetails } from "../Products/ProductService";
+import Swal from "sweetalert2";
 
+interface ProductDetailsType {
+  title: string;
+  category: string;
+  price: number;
+  image: string;
+}
 const ProductOverview = () => {
   const router = useRouter();
-  const [selectedImage, setSelectedImage] = useState(
-    "https://pagedone.io/asset/uploads/1700472379.png"
-  );
+  const id = useParams().id;
+  const [selectedImage, setSelectedImage] = useState("");
+  const [images, setImages] = useState<string[]>([]);
+  const [details, setDetails] = useState<ProductDetailsType>({
+    title: "",
+    category: "",
+    price: 0,
+    image: "",
+  });
 
-  const images = [
-    "https://pagedone.io/asset/uploads/1700472379.png",
-    "https://pagedone.io/asset/uploads/1711622397.png",
-    "https://pagedone.io/asset/uploads/1711622408.png",
-    "https://pagedone.io/asset/uploads/1711622419.png",
-    "https://pagedone.io/asset/uploads/1711622437.png",
-  ];
+  useEffect(() => {
+    ProductDetails(id)
+      .then((res) => {
+        setDetails(res);
+        setSelectedImage(res.image);
+        setImages([res.image]);
+      })
+      .catch((error) => {
+        Swal.fire({
+          title: error.mesaage,
+          icon: "error",
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <section className="m-1">
@@ -61,33 +83,20 @@ const ProductOverview = () => {
             <div className="flex items-center justify-between gap-4 mb-4">
               <div>
                 <h2 className="text-xl font-bold text-gray-900 mb-1">
-                  Yellow Summer Travel Bag
+                  {details.title}
                 </h2>
-                <p className="text-sm text-gray-500">ABS LUGGAGE</p>
+                <p className="text-sm text-gray-500">{details.category}</p>
               </div>
             </div>
 
             <div className="flex items-center gap-3 mb-6">
-              <h5 className="text-lg font-semibold text-gray-900">$199.00</h5>
+              <h5 className="text-lg font-semibold text-gray-900">
+                {" "}
+                ₹{(details.price * 80).toFixed(2)}
+              </h5>
               <span className="text-sm font-semibold text-indigo-600">
                 30% off
               </span>
-            </div>
-
-            <p className="text-sm font-medium text-gray-900 mb-2">Color</p>
-            <div className="grid grid-cols-3 gap-2 mb-4">
-              {["Black", "Brown", "Beige"].map((color, index) => (
-                <div key={index} className="text-center">
-                  <div className="border rounded-lg p-1">
-                    <img
-                      src={images[index]}
-                      alt={color}
-                      className="w-16 h-16 object-cover rounded-lg"
-                    />
-                  </div>
-                  <p className="text-xs text-gray-400 mt-1">{color}</p>
-                </div>
-              ))}
             </div>
 
             <p className="text-sm font-medium text-gray-900 mb-2">Size (KG)</p>

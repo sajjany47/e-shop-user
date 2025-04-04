@@ -25,3 +25,11 @@ export const CartDetails = async (id: any) => {
   );
   return response.data;
 };
+
+export const ProductDetails = async (id: any) => {
+  const response = await axios.get(
+    `${BASE_URL}/products/${id}`,
+    headerWithOutToken()
+  );
+  return response.data;
+};
