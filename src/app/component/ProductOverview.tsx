@@ -4,8 +4,11 @@
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { RelativeData } from "@/shared/StaticData";
+import { useRouter } from "next/navigation";
 
 const ProductOverview = () => {
+  const router = useRouter();
   const [selectedImage, setSelectedImage] = useState(
     "https://pagedone.io/asset/uploads/1700472379.png"
   );
@@ -123,6 +126,61 @@ const ProductOverview = () => {
               Buy Now
             </Button>
           </div>
+        </div>
+      </div>
+      <div className="mt-8">
+        <h2 className="text-xl font-bold mb-4">Related Products</h2>
+        <div className="flex gap-4 overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-gray-100">
+          {RelativeData.map((product, index) => (
+            <div
+              key={index}
+              className="w-48 border rounded-lg p-3 flex-shrink-0 shadow-sm flex flex-col"
+            >
+              {/* Fixed Image Size */}
+              <div className="w-40 h-32 mx-auto overflow-hidden rounded-lg">
+                <img
+                  src={product.image}
+                  alt={product.title}
+                  className="w-full h-full object-cover"
+                />
+              </div>
+
+              {/* Fixed Title Height to Avoid Card Expansion */}
+              <div className="h-[40px] flex items-center justify-center">
+                <h3 className="text-sm font-semibold line-clamp-2 text-center">
+                  {product.title}
+                </h3>
+              </div>
+
+              {/* Price Section */}
+              <div className="flex items-center justify-between mt-2">
+                <span className="text-lg font-bold text-gray-900">
+                  ₹{(product.price * 80).toFixed(2)}
+                </span>
+                <span className="text-xs text-gray-500 line-through">
+                  ₹{(product.price * 80 + 113).toFixed(2)}
+                </span>
+              </div>
+
+              {/* Discount Label */}
+              <span className="text-xs font-medium text-green-600 block text-center">
+                Save 10%
+              </span>
+
+              {/* Buttons with Fixed Height */}
+              <div className="flex gap-2 mt-3">
+                <Button
+                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white text-xs h-9"
+                  onClick={() => router.push(`/Products/${product.id}`)}
+                >
+                  Buy Now
+                </Button>
+                <Button variant="outline" className="flex-1 text-xs h-9">
+                  Add to Cart
+                </Button>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     </section>
