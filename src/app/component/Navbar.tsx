@@ -8,13 +8,6 @@ import {
 import Image from "next/image";
 import { SheetContent } from "@/components/ui/sheet";
 import { Sheet } from "@/components/ui/sheet";
-import { Minus, Plus } from "lucide-react";
-import { Checkbox } from "@/components/ui/checkbox";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import { useSelector } from "react-redux";
@@ -26,92 +19,44 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { NavigationData } from "@/shared/StaticData";
+import { Checkbox } from "@/components/ui/checkbox";
+
+export const Categories = [
+  { name: "Men's Clothing", value: "men's clothing" },
+  { name: "Jewelery", value: "jewelery" },
+  { name: "Electronics", value: "electronics" },
+  { name: "Women's Clothing", value: "women's clothing" },
+];
 
 const Navbar = () => {
   const userDetails = useSelector((state: any) => state?.user);
   const cartDetails = useSelector((state: any) => state?.cart);
   const router = useRouter();
   const [open, setOpen] = useState(false);
-  const [collapsedSections, setCollapsedSections] = useState<
-    Record<string, boolean>
-  >({});
-
-  const combileNavigation = NavigationData.categories.flatMap((category) =>
-    category.sections.map((section) => ({
-      categoryId: category.id,
-      categoryName: category.name,
-      sectionId: section.id,
-      sectionName: section.name,
-      sectionItem: section.items,
-    }))
-  );
-
-  const toggleSection = (sectionId: string) => {
-    setCollapsedSections((prev) => ({
-      ...prev,
-      [sectionId]: !prev[sectionId],
-    }));
-  };
 
   return (
     <>
       <Sheet open={open} onOpenChange={() => setOpen(false)}>
         <SheetContent side="left">
           <div className="max-h-[600px] overflow-y-auto mt-8">
-            {combileNavigation.map((section, index) => (
-              <div key={index} className="border-t border-gray-200 px-4 py-6">
-                <Collapsible
-                  onOpenChange={() => toggleSection(section.sectionId)}
-                >
-                  <CollapsibleTrigger>
-                    <h3
-                      className="-mx-2 -my-3 flow-root"
-                      style={{ width: "250px" }}
+            <div className="border-t border-gray-200 px-4 py-6">
+              <h3 className="text-lg font-medium text-gray-900 mb-4">
+                Categories
+              </h3>
+              <div className="space-y-4">
+                {Categories.map((category, index) => (
+                  <div key={index} className="flex items-center gap-3">
+                    <Checkbox id={`category-${index}`} />
+                    <label
+                      htmlFor={`category-${index}`}
+                      className="text-sm text-gray-600"
                     >
-                      <div
-                        className="flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500"
-                        aria-controls={`filter-section-mobile-${index}`}
-                        aria-expanded="false"
-                      >
-                        <span className="font-medium text-gray-900">
-                          {section.sectionName}
-                        </span>
-                        <span className="ml-6 flex items-center">
-                          {collapsedSections[section.sectionId] ? (
-                            <Minus className="size-5" />
-                          ) : (
-                            <Plus className="size-5" />
-                          )}
-                        </span>
-                      </div>
-                    </h3>
-                  </CollapsibleTrigger>
-                  <CollapsibleContent className="pl-8">
-                    {collapsedSections[section.sectionId] && (
-                      <div
-                        className="pt-6"
-                        id={`filter-section-mobile-${index}`}
-                      >
-                        <div className="space-y-6">
-                          {section.sectionItem.map((item, idx) => (
-                            <div key={idx} className="flex gap-3">
-                              <Checkbox id={`${item._id}-${idx}`} />
-                              <label
-                                htmlFor={`${item._id}-${idx}`}
-                                className="min-w-0 flex-1 text-gray-500"
-                              >
-                                {item.name}
-                              </label>
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </CollapsibleContent>
-                </Collapsible>
+                      {category.name}
+                    </label>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
           {/* Auth Links */}
           <div className="space-y-6 border-t border-gray-200 px-4 py-6 cutom-avatar">
