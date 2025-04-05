@@ -119,6 +119,13 @@ export const NavigationData = {
   ],
 };
 
+export const Categories = [
+  { name: "Men's Clothing", value: "men's clothing" },
+  { name: "Jewelery", value: "jewelery" },
+  { name: "Electronics", value: "electronics" },
+  { name: "Women's Clothing", value: "women's clothing" },
+];
+
 export const RelativeData = [
   {
     id: 1,
