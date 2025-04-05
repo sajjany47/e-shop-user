@@ -1,8 +1,8 @@
 export const Categories = [
-  { name: "Men's Clothing", value: "men's clothing" },
-  { name: "Jewelery", value: "jewelery" },
-  { name: "Electronics", value: "electronics" },
-  { name: "Women's Clothing", value: "women's clothing" },
+  { id: 1, name: "Men's Clothing", value: "men's clothing" },
+  { id: 2, name: "Jewelery", value: "jewelery" },
+  { id: 3, name: "Electronics", value: "electronics" },
+  { id: 4, name: "Women's Clothing", value: "women's clothing" },
 ];
 
 export const RelativeData = [
