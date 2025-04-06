@@ -20,6 +20,8 @@ import {
 } from "@/components/ui/menubar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Checkbox } from "@/components/ui/checkbox";
+import { useDispatch } from "react-redux";
+import { setFilter } from "@/store/reducer/FilterReducer";
 
 export const Categories = [
   { name: "Men's Clothing", value: "men's clothing" },
@@ -29,10 +31,20 @@ export const Categories = [
 ];
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const userDetails = useSelector((state: any) => state?.user);
   const cartDetails = useSelector((state: any) => state?.cart);
+  const checkList = useSelector((state: any) => state.filter.checkList);
   const router = useRouter();
   const [open, setOpen] = useState(false);
+
+  const handleCheckboxChange = (value: string) => {
+    const updatedList = checkList?.includes(value)
+      ? checkList.filter((item: string) => item !== value)
+      : [...checkList, value];
+
+    dispatch(setFilter(updatedList));
+  };
 
   return (
     <>
@@ -46,7 +58,13 @@ const Navbar = () => {
               <div className="space-y-4">
                 {Categories.map((category, index) => (
                   <div key={index} className="flex items-center gap-3">
-                    <Checkbox id={`category-${index}`} />
+                    <Checkbox
+                      id={`category-${index}`}
+                      checked={checkList.includes(category.value)}
+                      onCheckedChange={() =>
+                        handleCheckboxChange(category.value)
+                      }
+                    />
                     <label
                       htmlFor={`category-${index}`}
                       className="text-sm text-gray-600"

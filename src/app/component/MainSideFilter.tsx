@@ -24,7 +24,7 @@ const MainSideFilter = () => {
 
     dispatch(setFilter(updatedList));
   };
-  console.log(checkList, "checkList");
+
   return (
     <aside className="hidden lg:block fixed top-24 left-0 h-[calc(100vh-6rem)] w-1/7 overflow-y-auto border-r border-gray-200 bg-white">
       <div className="py-6 px-4">
