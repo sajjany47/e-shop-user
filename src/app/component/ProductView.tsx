@@ -23,7 +23,10 @@ const ProductView = (props: any) => {
   };
   return (
     <Card>
-      <div className="h-56 w-full">
+      <div
+        className="h-56 w-full cursor-pointer"
+        onClick={() => router.push(`/Products/${data.id}`)}
+      >
         <img
           className="mx-auto h-full object-cover"
           src={data.image}
@@ -49,8 +52,14 @@ const ProductView = (props: any) => {
             </Button>
           </div>
         </div>
-        <h1 className="text-2xl font-bold mb-2"> {data.title}</h1>
-        <p className="text-sm text-gray-500 mb-4">
+        <h1
+          className="text-2xl font-bold mb-2 cursor-pointer"
+          onClick={() => router.push(`/Products/${data.id}`)}
+        >
+          {" "}
+          {data.title}
+        </h1>
+        <p className="text-sm text-gray-500 mb-4 ">
           {showFullDescription
             ? data?.description
             : `${data?.description?.slice(0, 120)}...`}
@@ -85,7 +94,10 @@ const ProductView = (props: any) => {
             </li>
           ))}
         </ul> */}
-        <div className="flex items-center justify-between mb-4">
+        <div
+          className="flex items-center justify-between mb-4 cursor-pointer"
+          onClick={() => router.push(`/Products/${data.id}`)}
+        >
           <div>
             <span className="text-3xl font-bold text-gray-900">
               {" "}
@@ -99,7 +111,10 @@ const ProductView = (props: any) => {
             Save 10%
           </span>
         </div>
-        <p className="text-green-600 text-sm font-semibold mb-4">
+        <p
+          className="text-green-600 text-sm font-semibold mb-4 cursor-pointer"
+          onClick={() => router.push(`/Products/${data.id}`)}
+        >
           Free Delivery
         </p>
         <div className="flex gap-4">

@@ -80,7 +80,7 @@ const ProductOverview = () => {
                 <img
                   src={selectedImage}
                   alt="Selected Product"
-                  className="rounded-xl object-cover w-full h-64"
+                  className="rounded-xl object-cover w-full h-100"
                 />
               </div>
               <div className="flex gap-3 justify-center">
@@ -176,8 +176,8 @@ const ProductOverview = () => {
                   </Button>
                 </div>
                 <Button
-                  className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer"
-                  variant={"ghost"}
+                  className="flex-1  text-xs cursor-pointer"
+                  variant="outline"
                 >
                   Add to Cart
                 </Button>
@@ -195,7 +195,8 @@ const ProductOverview = () => {
             {relativeData.map((product: any, index) => (
               <div
                 key={index}
-                className="w-48 border rounded-lg p-3 flex-shrink-0 shadow-sm flex flex-col"
+                className="w-60 border rounded-lg p-3 flex-shrink-0 shadow-sm flex flex-col"
+                onClick={() => router.push(`/Products/${product.id}`)}
               >
                 {/* Fixed Image Size */}
                 <div className="w-40 h-32 mx-auto overflow-hidden rounded-lg">
@@ -207,7 +208,10 @@ const ProductOverview = () => {
                 </div>
 
                 {/* Fixed Title Height to Avoid Card Expansion */}
-                <div className="h-[40px] flex items-center justify-center">
+                <div
+                  className="h-[40px] flex items-center justify-center"
+                  onClick={() => router.push(`/Products/${product.id}`)}
+                >
                   <h3 className="text-sm font-semibold line-clamp-2 text-center">
                     {product.title}
                   </h3>
@@ -224,9 +228,14 @@ const ProductOverview = () => {
                 </div>
 
                 {/* Discount Label */}
-                <span className="text-xs font-medium text-green-600 block text-center">
-                  Save 10%
-                </span>
+                <div className="flex items-center mt-2">
+                  <span className="bg-green-500 text-white text-sm font-semibold px-2.5 py-0.5 rounded">
+                    {product?.rating?.rate} ★
+                  </span>
+                  <span className="text-sm text-gray-500 ml-2">
+                    {product?.rating?.count} reviews
+                  </span>
+                </div>
 
                 {/* Buttons with Fixed Height */}
                 <div className="flex gap-2 mt-3">

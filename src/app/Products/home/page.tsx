@@ -33,7 +33,6 @@ const Home = () => {
           icon: "error",
         });
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [checkList]);
 
   return (
