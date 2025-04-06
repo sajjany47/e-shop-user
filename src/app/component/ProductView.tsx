@@ -39,11 +39,12 @@ const ProductView = (props: any) => {
             <Button
               variant="ghost"
               size="icon"
+              className="cursor-pointer"
               onClick={() => router.push(`/Products/${data.id}`)}
             >
               <Eye className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon">
+            <Button variant="ghost" size="icon" className="cursor-pointer">
               <Heart className="h-5 w-5" />
             </Button>
           </div>
@@ -102,16 +103,24 @@ const ProductView = (props: any) => {
           Free Delivery
         </p>
         <div className="flex gap-4">
-          <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white">
+          <Button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white cursor-pointer">
             Buy Now
           </Button>
           {quantity > 0 ? (
             <div className="flex items-center space-x-2">
-              <Button onClick={handleDecrease} variant="secondary">
+              <Button
+                onClick={handleDecrease}
+                variant="secondary"
+                className="cursor-pointer"
+              >
                 -
               </Button>
               <span className="text-lg font-semibold">{quantity}</span>
-              <Button onClick={handleIncrease} variant="secondary">
+              <Button
+                onClick={handleIncrease}
+                variant="secondary"
+                className="cursor-pointer"
+              >
                 +
               </Button>
             </div>
@@ -119,7 +128,7 @@ const ProductView = (props: any) => {
             <Button
               onClick={handleIncrease}
               variant="outline"
-              className="flex-1"
+              className="flex-1 cursor-pointer"
             >
               Add to Cart
             </Button>
